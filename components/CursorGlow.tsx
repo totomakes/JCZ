@@ -22,7 +22,7 @@ const CursorGlow: React.FC = () => {
 
     return (
         <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-            {/* Primary Multi-color Organic Glow */}
+            {/* Primary Multi-color Organic Glow - Hardware Optimized */}
             <motion.div
                 style={{
                     x: springX,
@@ -39,10 +39,10 @@ const CursorGlow: React.FC = () => {
                     rotate: { duration: 15, repeat: Infinity, ease: "linear" },
                     scale: { duration: 8, repeat: Infinity, ease: "easeInOut" }
                 }}
-                className="absolute w-[800px] h-[800px] rounded-full blur-[140px] opacity-[0.22]"
+                className="absolute w-[500px] h-[500px] rounded-full blur-[80px] opacity-[0.28]"
             />
 
-            {/* Vibrant Core Pulse */}
+            {/* Vibrant Core Pulse - Reduced size for precision */}
             <motion.div
                 style={{
                     x: springX,
@@ -52,14 +52,14 @@ const CursorGlow: React.FC = () => {
                 }}
                 animate={{
                     scale: [1, 1.3, 1],
-                    opacity: [0.1, 0.15, 0.1]
+                    opacity: [0.12, 0.20, 0.12]
                 }}
                 transition={{
                     duration: 6,
                     repeat: Infinity,
                     ease: "easeInOut"
                 }}
-                className="absolute w-[450px] h-[450px] bg-brand rounded-full blur-[90px]"
+                className="absolute w-[300px] h-[300px] bg-brand rounded-full blur-[60px]"
             />
         </div>
     );
