@@ -29,7 +29,7 @@ const CursorGlow: React.FC = () => {
                     y: springY,
                     translateX: '-50%',
                     translateY: '-50%',
-                    background: 'conic-gradient(from 0deg at 50% 50%, #26B44A 0deg, #9333ea 120deg, #26B44A 240deg, #9333ea 360deg)',
+                    background: 'conic-gradient(from 0deg at 50% 50%, #D4AF37 0deg, #9333ea 120deg, #D4AF37 240deg, #9333ea 360deg)',
                 }}
                 animate={{
                     rotate: 360,
