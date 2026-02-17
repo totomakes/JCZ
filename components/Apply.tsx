@@ -81,6 +81,38 @@ const Apply: React.FC<ApplyProps> = ({ isSubmitting, aiFeedback, onSubmit, onRes
                                 )}
                             </select>
                         </div>
+                        {isAdvisor && (
+                            <>
+                                <div className="space-y-2">
+                                    <label className="block text-sm font-heading tracking-widest text-muted uppercase">Annual Revenue</label>
+                                    <select name="revenue" required className="w-full bg-white/5 border border-white/10 p-5 text-white focus:border-brand outline-none appearance-none transition-colors">
+                                        <option value="" className="bg-bg">Select Range...</option>
+                                        <option value="1m" className="bg-bg">$1M - $5M</option>
+                                        <option value="5m" className="bg-bg">$5M - $20M</option>
+                                        <option value="20m" className="bg-bg">$20M - $100M</option>
+                                        <option value="100m" className="bg-bg">$100M+</option>
+                                    </select>
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="block text-sm font-heading tracking-widest text-muted uppercase">Investment Threshold</label>
+                                    <select name="threshold" required className="w-full bg-white/5 border border-white/10 p-5 text-white focus:border-brand outline-none appearance-none transition-colors">
+                                        <option value="" className="bg-bg">Select Mid-Term Budget...</option>
+                                        <option value="50k" className="bg-bg">$50k - $150k</option>
+                                        <option value="150k" className="bg-bg">$150k - $500k</option>
+                                        <option value="500k" className="bg-bg">$500k+</option>
+                                    </select>
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="block text-sm font-heading tracking-widest text-muted uppercase">Desired Timeline</label>
+                                    <select name="timeline" required className="w-full bg-white/5 border border-white/10 p-5 text-white focus:border-brand outline-none appearance-none transition-colors">
+                                        <option value="" className="bg-bg">Select...</option>
+                                        <option value="immediate" className="bg-bg">Immediate Execution</option>
+                                        <option value="quarter" className="bg-bg">Next Quarter</option>
+                                        <option value="planning" className="bg-bg">Planning Stage</option>
+                                    </select>
+                                </div>
+                            </>
+                        )}
                         <div className="space-y-2">
                             <label className="block text-sm font-heading tracking-widest text-muted uppercase">Entity / Production</label>
                             <input name="entity" type="text" required className="w-full bg-white/5 border border-white/10 p-5 text-white focus:border-brand outline-none transition-colors" placeholder={isAdvisor ? "Enterprise Name" : "Production House"} />

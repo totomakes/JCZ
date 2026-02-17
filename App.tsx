@@ -56,6 +56,7 @@ const App: React.FC = () => {
         return (
           <Apply
             key="apply"
+            persona={persona}
             isSubmitting={isSubmitting}
             aiFeedback={aiFeedback}
             onSubmit={handleApplySubmit}
