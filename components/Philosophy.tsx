@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Persona } from '../types';
 
@@ -7,41 +7,44 @@ interface PhilosophyProps {
 }
 
 const Philosophy: React.FC<PhilosophyProps> = ({ persona }) => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     const isAdvisor = persona === Persona.ADVISOR;
 
     const advisorPoints = [
         {
             id: '01',
-            title: 'PRODUCTION IS A COMMODITY',
-            text: 'High-quality video and design are the table stakes. They are no longer a differentiator. Without the underlying architecture of authority, you are just making expensive noise.'
+            title: 'PRODUCTION IS TABLE STAKES',
+            text: 'Cinematic quality is expected. It is not the edge. Without authority architecture beneath it, production becomes decoration.'
         },
         {
             id: '02',
-            title: 'AUTHORITY IS ENGINEERED',
-            text: 'Status is a technical challenge. We map the psychological journey of your target market and ensure every visual and verbal cue reinforces your position at the top.'
+            title: 'AUTHORITY IS STRUCTURAL',
+            text: 'Status is not accidental. It is engineered through controlled narrative, psychological positioning, and consistent visual signals.'
         },
         {
             id: '03',
-            title: 'RADICAL EXCLUSIVITY',
-            text: 'The most powerful position in any market is "hard to reach." We build systems that elevate you while filtering for high-intent, low-friction clients.'
+            title: 'EXCLUSIVITY CREATES LEVERAGE',
+            text: 'The strongest position in any market is limited access. Strategic filtering elevates perception and attracts high-intent operators.'
         }
     ];
 
     const actorPoints = [
         {
             id: '01',
-            title: 'TRUTH OVER PERFORMANCE',
-            text: 'Audiences don\'t want to see acting; they want to see truth. My craft is built on the architecture of authenticity within the frame.'
+            title: 'PERFORMANCE IS ONLY THE START',
+            text: 'Acting well is table stakes. Without strategic role selection and narrative alignment, your performances disappear. We map each role to the long-term arc of your career.'
         },
         {
             id: '02',
-            title: 'THE FRAME IS THE STAGE',
-            text: 'Every micro-expression is a strategic choice. We command the attention of the viewer by mastering the visual language of presence.'
+            title: 'PRESENCE IS ENGINEERED',
+            text: 'Industry perception doesn’t happen by accident. We guide the media narrative, ensure each project builds upon the last, and craft an intentional trajectory.'
         },
         {
             id: '03',
-            title: 'IMPACT IS THE OUTCOME',
-            text: 'Whether it\'s a 30-second commercial or a 2-hour feature, the goal is the same: to move the audience from their current state to a high-intent reality.'
+            title: 'THE POWER OF SELECTIVITY',
+            text: 'Not every role advances your authority. We filter for projects that elevate your craft, broaden your reach, and deepen your industry positioning.'
         }
     ];
 
@@ -55,7 +58,7 @@ const Philosophy: React.FC<PhilosophyProps> = ({ persona }) => {
             className="max-w-4xl pt-10 space-y-16"
         >
             <h2 className="heading-xl">
-                {isAdvisor ? 'THE THESIS' : 'THE CRAFT'}
+                {isAdvisor ? 'THE THESIS' : 'THE ETHOS'}
             </h2>
             <div className="space-y-24">
                 {points.map((point, i) => (
@@ -87,7 +90,7 @@ const Philosophy: React.FC<PhilosophyProps> = ({ persona }) => {
                 <p className="text-brand font-heading text-4xl leading-tight">
                     {isAdvisor
                         ? '"THE ULTIMATE DIFFERENTIATOR IS NOT WHAT YOU DO, BUT WHO YOU ARE PERCEIVED TO BE."'
-                        : '"THE ACTOR IS NOT A PERFORMER, BUT AN ARCHITECT OF EMOTIONAL REALITY."'}
+                        : '"IT\'S NOT JUST THE ROLE YOU PLAY, BUT THE STORY YOU SHAPE."'}
                 </p>
             </motion.div>
         </motion.div>

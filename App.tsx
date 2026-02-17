@@ -20,27 +20,52 @@ const App: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [aiFeedback, setAiFeedback] = useState<string | null>(null);
 
-  // Scroll to top on page change
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [activePage]);
 
   const handleApplySubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     const formData = new FormData(e.currentTarget);
     const data = {
-      revenue: formData.get('revenue') as string,
       objective: formData.get('objective') as string,
-      structure: formData.get('structure') as string,
+      revenue: formData.get('revenue') as string,
+      threshold: formData.get('threshold') as string,
       timeline: formData.get('timeline') as string,
+      type: formData.get('type') as string,
+      entity: formData.get('entity') as string,
+      structure: formData.get('structure') as string,
     };
 
+    // Construct mailto
+    const subject = `[JCZ - ${persona === Persona.ADVISOR ? 'ADVISOR' : 'ACTOR'}] New Inquiry: ${data.entity || 'General'}`;
+    const body = `
+New Submission from Authority Conversion System
+----------------------------------------------
+Persona: ${persona === Persona.ADVISOR ? 'Strategic Advisor' : 'Professional Actor'}
+Entity/Project: ${data.entity}
+Primary Objective: ${data.objective}
+${persona === Persona.ADVISOR ? `Annual Revenue: ${data.revenue}\nInvestment Threshold: ${data.threshold}` : `Production Type: ${data.type}\nTimeline: ${data.timeline}`}
+
+Narrative Vision / Project Details:
+${data.structure}
+----------------------------------------------
+    `.trim();
+
+    const mailtoLink = `mailto:Jc@markethunterz.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    // Trigger mailto
+    window.location.href = mailtoLink;
+
     try {
-      const feedback = await analyzeApplication(data);
-      setAiFeedback(feedback || "Application received. We will review your strategy.");
+      // Still run AI analysis for UI feedback
+      const feedback = await analyzeApplication({
+        revenue: data.revenue,
+        objective: data.objective,
+        structure: data.structure,
+        timeline: data.timeline
+      });
+      setAiFeedback(feedback || "Application initiated. Your mail client should have opened with the pre-filled details.");
     } catch (error) {
-      setAiFeedback("System error. Please contact directly.");
+      setAiFeedback("Form processed. Your mail client should have opened. If not, please email Jc@markethunterz.com directly.");
     } finally {
       setIsSubmitting(false);
     }
@@ -85,12 +110,15 @@ const App: React.FC = () => {
         />
 
         {/* Mobile Nav */}
-        <div className="md:hidden fixed top-0 left-0 w-full p-6 z-50 bg-bg/80 backdrop-blur-md border-b border-white/10 flex justify-between items-center shadow-xl">
-          <h1 className="font-heading text-2xl text-brand cursor-pointer" onClick={() => setActivePage(Page.HOME)}>JCZ</h1>
+        <div className="md:hidden fixed top-0 left-0 w-full p-4 z-50 bg-bg/80 backdrop-blur-md border-b border-white/10 flex justify-between items-center shadow-xl">
+          <div className="flex items-center gap-3 cursor-pointer" onClick={() => setActivePage(Page.HOME)}>
+            <img src="/assets/JC_Logo_White.svg" alt="JC" className="w-16 h-16" />
+            <h1 className="font-heading text-lg text-brand leading-none tracking-tighter">JUAN CARLOS<br />ZERMEÑO</h1>
+          </div>
           <button onClick={() => setActivePage(Page.APPLY)} className="font-heading text-sm border border-brand px-4 py-2 text-brand hover:bg-brand hover:text-bg transition-all">APPLY</button>
         </div>
 
-        <main className="md:ml-64 px-6 pb-20 pt-10 md:px-20 md:pb-32 md:pt-12">
+        <main className="md:ml-64 px-6 pb-20 pt-32 md:px-20 md:pb-32 md:pt-12">
           <div className="max-w-7xl mx-auto">
             <AnimatePresence mode="wait">
               {renderContent()}

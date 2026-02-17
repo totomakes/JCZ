@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Persona } from '../types';
 
@@ -11,6 +11,10 @@ interface ApplyProps {
 }
 
 const Apply: React.FC<ApplyProps> = ({ isSubmitting, aiFeedback, onSubmit, onReset, persona }) => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        onReset();
+    }, []);
     const isAdvisor = persona === Persona.ADVISOR;
 
     return (
@@ -21,12 +25,12 @@ const Apply: React.FC<ApplyProps> = ({ isSubmitting, aiFeedback, onSubmit, onRes
         >
             <header className="space-y-4">
                 <h2 className="heading-xl">
-                    {isAdvisor ? 'START THE ARCHITECTURE' : 'PRODUCTION INQUIRY'}
+                    {isAdvisor ? 'STRATEGIC APPLICATION' : 'STRATEGIC COLLABORATION'}
                 </h2>
                 <p className="text-muted text-xl">
                     {isAdvisor
-                        ? "We only accept 4 high-stakes advisory clients per quarter. Your application will be analyzed for strategic fit."
-                        : "Inquiries for feature films, global commercials, and theatrical productions."}
+                        ? "I work with a limited number of founders and organizations committed to structural repositioning. Complete the qualification below."
+                        : "I work with directors, producers, and creative teams who are crafting intentional narratives. Filter your inquiry below."}
                 </p>
             </header>
 
@@ -68,58 +72,76 @@ const Apply: React.FC<ApplyProps> = ({ isSubmitting, aiFeedback, onSubmit, onRes
                                 <option value="" className="bg-bg">Select...</option>
                                 {isAdvisor ? (
                                     <>
-                                        <option value="authority" className="bg-bg">Build Personal Authority</option>
-                                        <option value="scale" className="bg-bg">Scale Corporate Brand</option>
-                                        <option value="luxury" className="bg-bg">Exit Commodity Tier</option>
+                                        <option value="Founder Authority Ascension" className="bg-bg">Founder Authority Ascension</option>
+                                        <option value="Category Brand Domination" className="bg-bg">Category Brand Domination</option>
+                                        <option value="Luxury Tier Elevation" className="bg-bg">Luxury Tier Elevation</option>
+                                        <option value="Authority Performance Engine" className="bg-bg">Authority Performance Engine</option>
                                     </>
                                 ) : (
                                     <>
-                                        <option value="commercial" className="bg-bg">Commercial Representation</option>
-                                        <option value="film" className="bg-bg">Feature Film Collaboration</option>
-                                        <option value="talent" className="bg-bg">Talent Inquiry</option>
+                                        <option value="lead" className="bg-bg">Lead Role</option>
+                                        <option value="genre" className="bg-bg">Genre Expansion</option>
+                                        <option value="media" className="bg-bg">Multi-Media</option>
+                                        <option value="thought" className="bg-bg">Thought Leader</option>
                                     </>
                                 )}
                             </select>
                         </div>
-                        {isAdvisor && (
+                        {isAdvisor ? (
                             <>
                                 <div className="space-y-2">
                                     <label className="block text-sm font-heading tracking-widest text-muted uppercase">Annual Revenue</label>
                                     <select name="revenue" required className="w-full bg-white/5 border border-white/10 p-5 text-white focus:border-brand outline-none appearance-none transition-colors">
                                         <option value="" className="bg-bg">Select Range...</option>
-                                        <option value="1m" className="bg-bg">$1M - $5M</option>
-                                        <option value="5m" className="bg-bg">$5M - $20M</option>
-                                        <option value="20m" className="bg-bg">$20M - $100M</option>
-                                        <option value="100m" className="bg-bg">$100M+</option>
+                                        <option value="$1M - $5M" className="bg-bg">$1M - $5M</option>
+                                        <option value="$5M - $20M" className="bg-bg">$5M - $20M</option>
+                                        <option value="$20M+" className="bg-bg">$20M+</option>
                                     </select>
                                 </div>
                                 <div className="space-y-2">
                                     <label className="block text-sm font-heading tracking-widest text-muted uppercase">Investment Threshold</label>
                                     <select name="threshold" required className="w-full bg-white/5 border border-white/10 p-5 text-white focus:border-brand outline-none appearance-none transition-colors">
-                                        <option value="" className="bg-bg">Select Mid-Term Budget...</option>
-                                        <option value="50k" className="bg-bg">$50k - $150k</option>
-                                        <option value="150k" className="bg-bg">$150k - $500k</option>
-                                        <option value="500k" className="bg-bg">$500k+</option>
+                                        <option value="" className="bg-bg">Engagement minimum $10k/mo</option>
+                                        <option value="$10k - $25k" className="bg-bg">$10k - $25k/mo</option>
+                                        <option value="$25k - $50k" className="bg-bg">$25k - $50k/mo</option>
+                                        <option value="$50k+" className="bg-bg">$50k+/mo</option>
                                     </select>
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="block text-sm font-heading tracking-widest text-muted uppercase">Desired Timeline</label>
+                                    <label className="block text-sm font-heading tracking-widest text-muted uppercase">Timeline</label>
                                     <select name="timeline" required className="w-full bg-white/5 border border-white/10 p-5 text-white focus:border-brand outline-none appearance-none transition-colors">
-                                        <option value="" className="bg-bg">Select...</option>
-                                        <option value="immediate" className="bg-bg">Immediate Execution</option>
-                                        <option value="quarter" className="bg-bg">Next Quarter</option>
-                                        <option value="planning" className="bg-bg">Planning Stage</option>
+                                        <option value="" className="bg-bg">Select window...</option>
+                                        <option value="Immediate" className="bg-bg">Immediate Execution</option>
+                                        <option value="30-90 Days" className="bg-bg">30-90 Days</option>
+                                        <option value="Planning" className="bg-bg">Future Planning</option>
                                     </select>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <div className="space-y-2">
+                                    <label className="block text-sm font-heading tracking-widest text-muted uppercase">Production Type</label>
+                                    <select name="type" required className="w-full bg-white/5 border border-white/10 p-5 text-white focus:border-brand outline-none appearance-none transition-colors">
+                                        <option value="" className="bg-bg">Select...</option>
+                                        <option value="film" className="bg-bg">Film</option>
+                                        <option value="series" className="bg-bg">Series</option>
+                                        <option value="digital" className="bg-bg">Digital</option>
+                                        <option value="stage" className="bg-bg">Stage</option>
+                                    </select>
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="block text-sm font-heading tracking-widest text-muted uppercase">Timeline</label>
+                                    <input name="timeline" type="text" required className="w-full bg-white/5 border border-white/10 p-5 text-white focus:border-brand outline-none transition-colors" placeholder="Production window" />
                                 </div>
                             </>
                         )}
                         <div className="space-y-2">
-                            <label className="block text-sm font-heading tracking-widest text-muted uppercase">Entity / Production</label>
-                            <input name="entity" type="text" required className="w-full bg-white/5 border border-white/10 p-5 text-white focus:border-brand outline-none transition-colors" placeholder={isAdvisor ? "Enterprise Name" : "Production House"} />
+                            <label className="block text-sm font-heading tracking-widest text-muted uppercase">{isAdvisor ? "Entity Name" : "Entity / Production"}</label>
+                            <input name="entity" type="text" required className="w-full bg-white/5 border border-white/10 p-5 text-white focus:border-brand outline-none transition-colors" placeholder={isAdvisor ? "Enterprise Name" : "Production Title"} />
                         </div>
                         <div className="md:col-span-2 space-y-2">
-                            <label className="block text-sm font-heading tracking-widest text-muted uppercase">Context / Project Details</label>
-                            <textarea name="structure" required rows={4} className="w-full bg-white/5 border border-white/10 p-5 text-white focus:border-brand outline-none transition-colors resize-none" placeholder={isAdvisor ? "Briefly describe your market position..." : "Describe the project, role, and timeline..."}></textarea>
+                            <label className="block text-sm font-heading tracking-widest text-muted uppercase">{isAdvisor ? "Marketing Structure / Context" : "Narrative Vision"}</label>
+                            <textarea name="structure" required rows={4} className="w-full bg-white/5 border border-white/10 p-5 text-white focus:border-brand outline-none transition-colors resize-none" placeholder={isAdvisor ? "Describe your current marketing assembly..." : "Open-ended alignment / Describe the role and strategic goals..."}></textarea>
                         </div>
                         <div className="md:col-span-2 pt-6">
                             <button
@@ -127,10 +149,12 @@ const Apply: React.FC<ApplyProps> = ({ isSubmitting, aiFeedback, onSubmit, onRes
                                 disabled={isSubmitting}
                                 className="w-full py-6 bg-brand text-bg font-heading text-2xl tracking-widest hover:bg-brand-dark transition-all disabled:opacity-50"
                             >
-                                {isSubmitting ? 'ANALYZING...' : (isAdvisor ? 'SUBMIT APPLICATION' : 'SEND INQUIRY')}
+                                {isSubmitting ? 'ANALYZING...' : (isAdvisor ? 'SUBMIT APPLICATION' : 'REQUEST DIRECTION')}
                             </button>
                             <p className="mt-4 text-[10px] text-muted uppercase tracking-widest text-center opacity-60">
-                                All inquiries are reviewed personally. Expect a 48h turnaround.
+                                {isAdvisor
+                                    ? "All applications are reviewed personally by Juan Carlos Zermeño. Qualified partners are contacted within 48 hours."
+                                    : "All collaboration requests are reviewed personally. If aligned, I’ll connect to explore our next narrative."}
                             </p>
                         </div>
                     </motion.form>

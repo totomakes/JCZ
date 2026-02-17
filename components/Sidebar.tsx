@@ -19,26 +19,28 @@ const Sidebar: React.FC<SidebarProps> = ({ activePage, onNavigate, currentPerson
       { id: Page.APPLY, label: '05 / APPLY' },
     ]
     : [
-      { id: Page.HOME, label: '01 / SYSTEM' },
-      { id: Page.CASE_STUDIES, label: '02 / REEL' },
-      { id: Page.PHILOSOPHY, label: '03 / THESIS' },
-      { id: Page.APPLY, label: '04 / ACTION' },
+      { id: Page.HOME, label: '01 / ARC' },
+      { id: Page.CASE_STUDIES, label: '02 / REELS' },
+      { id: Page.FRAMEWORK, label: '03 / CRAFT' },
+      { id: Page.PHILOSOPHY, label: '04 / ETHOS' },
+      { id: Page.APPLY, label: '05 / CONNECT' },
     ];
 
   return (
     <nav className="fixed left-0 top-0 h-full w-20 md:w-64 border-r border-white/10 z-50 bg-bg hidden md:flex flex-col justify-between p-8">
       <div>
         <div
-          className="mb-20 cursor-pointer group"
+          className="mb-16 cursor-pointer group flex flex-col items-center text-center"
           onClick={() => onNavigate(Page.HOME)}
         >
-          <h1 className="font-heading text-3xl leading-none text-brand">JCZ</h1>
-          <p className="text-[10px] tracking-widest text-muted mt-2 group-hover:text-white transition-colors uppercase">
+          <img src="/assets/JC_Logo_White.svg" alt="JC" className="w-20 h-20 mb-6 group-hover:scale-110 transition-transform" />
+          <h1 className="font-heading text-2xl leading-none text-brand tracking-tighter transition-colors">JUAN CARLOS<br />ZERMEÑO</h1>
+          <p className="text-[9px] tracking-[0.2em] text-muted mt-2 group-hover:text-white transition-colors uppercase">
             {currentPersona === Persona.ADVISOR ? 'Strategic Advisor' : 'Professional Actor'}
           </p>
         </div>
 
-        <div className="mb-12">
+        <div className="mb-12 flex justify-center">
           <PersonaToggle currentPersona={currentPersona} onToggle={onPersonaChange} />
         </div>
 
@@ -56,8 +58,33 @@ const Sidebar: React.FC<SidebarProps> = ({ activePage, onNavigate, currentPerson
         </div>
       </div>
 
-      <div className="text-[10px] text-muted rotate-180 [writing-mode:vertical-lr] self-center">
-        {currentPersona === Persona.ADVISOR ? 'STRATEGIC AUTHORITY' : 'CINEMATIC PRESENCE'} © 2026
+      <div className="space-y-6 flex flex-col items-center">
+        <a
+          href="https://www.instagram.com/j_c_zermeno/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-muted hover:text-brand transition-colors p-2 group"
+          aria-label="Instagram"
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="group-hover:scale-110 transition-transform"
+          >
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </a>
+        <div className="text-[10px] text-muted rotate-180 [writing-mode:vertical-lr] self-center">
+          {currentPersona === Persona.ADVISOR ? 'STRATEGIC AUTHORITY' : 'DIRECTED PRESENCE'} © 2026
+        </div>
       </div>
     </nav>
   );

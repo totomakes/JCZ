@@ -5,10 +5,10 @@ const CursorGlow: React.FC = () => {
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 
-    // Smooth out the movement
-    const springConfig = { damping: 25, stiffness: 150 };
-    const scrollX = useSpring(mouseX, springConfig);
-    const scrollY = useSpring(mouseY, springConfig);
+    // High-performance spring for near-instant tracking
+    const springConfig = { damping: 45, stiffness: 500, restDelta: 0.001 };
+    const springX = useSpring(mouseX, springConfig);
+    const springY = useSpring(mouseY, springConfig);
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
@@ -21,16 +21,47 @@ const CursorGlow: React.FC = () => {
     }, [mouseX, mouseY]);
 
     return (
-        <motion.div
-            style={{
-                left: scrollX,
-                top: scrollY,
-            }}
-            className="fixed pointer-events-none z-0 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand/10 rounded-full blur-[120px] mix-blend-screen opacity-50"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.5 }}
-            transition={{ duration: 1 }}
-        />
+        <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+            {/* Primary Multi-color Organic Glow */}
+            <motion.div
+                style={{
+                    x: springX,
+                    y: springY,
+                    translateX: '-50%',
+                    translateY: '-50%',
+                    background: 'conic-gradient(from 0deg at 50% 50%, #26B44A 0deg, #9333ea 120deg, #26B44A 240deg, #9333ea 360deg)',
+                }}
+                animate={{
+                    rotate: 360,
+                    scale: [1, 1.15, 1],
+                }}
+                transition={{
+                    rotate: { duration: 15, repeat: Infinity, ease: "linear" },
+                    scale: { duration: 8, repeat: Infinity, ease: "easeInOut" }
+                }}
+                className="absolute w-[800px] h-[800px] rounded-full blur-[140px] opacity-[0.22]"
+            />
+
+            {/* Vibrant Core Pulse */}
+            <motion.div
+                style={{
+                    x: springX,
+                    y: springY,
+                    translateX: '-50%',
+                    translateY: '-50%',
+                }}
+                animate={{
+                    scale: [1, 1.3, 1],
+                    opacity: [0.1, 0.15, 0.1]
+                }}
+                transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                }}
+                className="absolute w-[450px] h-[450px] bg-brand rounded-full blur-[90px]"
+            />
+        </div>
     );
 };
 
