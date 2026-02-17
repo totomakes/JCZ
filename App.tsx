@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import Sidebar from './components/Sidebar';
@@ -7,6 +6,7 @@ import CaseStudies from './components/CaseStudies';
 import Apply from './components/Apply';
 import Philosophy from './components/Philosophy';
 import FrameworkView from './components/Framework';
+import PersonaToggle from './components/PersonaToggle';
 import { Page, Persona } from './types';
 import { analyzeApplication } from './services/gemini';
 
@@ -19,7 +19,6 @@ const App: React.FC = () => {
   const [persona, setPersona] = useState<Persona>(Persona.ADVISOR);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [aiFeedback, setAiFeedback] = useState<string | null>(null);
-
 
   const handleApplySubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -110,12 +109,22 @@ ${data.structure}
         />
 
         {/* Mobile Nav */}
-        <div className="md:hidden fixed top-0 left-0 w-full p-4 z-50 bg-bg/80 backdrop-blur-md border-b border-white/10 flex justify-between items-center shadow-xl">
-          <div className="flex items-center gap-3 cursor-pointer" onClick={() => setActivePage(Page.HOME)}>
-            <img src="/assets/JC_Logo_White.svg" alt="JC" className="w-16 h-16" />
-            <h1 className="font-heading text-lg text-brand leading-none tracking-tighter">JUAN CARLOS<br />ZERMEÑO</h1>
+        <div className="md:hidden fixed top-0 left-0 w-full p-4 z-50 bg-bg/80 backdrop-blur-md border-b border-white/10 flex justify-between items-center shadow-xl gap-2">
+          <div className="flex items-center gap-2 cursor-pointer shrink-0" onClick={() => setActivePage(Page.HOME)}>
+            <img src="/assets/JC_Logo_White.svg" alt="JC" className="w-12 h-12" />
+            <h1 className="font-heading text-xs text-brand leading-none tracking-tighter hidden sm:block">JUAN CARLOS<br />ZERMEÑO</h1>
           </div>
-          <button onClick={() => setActivePage(Page.APPLY)} className="font-heading text-sm border border-brand px-4 py-2 text-brand hover:bg-brand hover:text-bg transition-all">APPLY</button>
+
+          <div className="scale-75 origin-center">
+            <PersonaToggle currentPersona={persona} onToggle={setPersona} />
+          </div>
+
+          <button
+            onClick={() => setActivePage(Page.APPLY)}
+            className="font-heading text-[10px] border border-brand px-3 py-1.5 text-brand hover:bg-brand hover:text-bg transition-all shrink-0"
+          >
+            APPLY
+          </button>
         </div>
 
         <main className="md:ml-64 px-6 pb-20 pt-32 md:px-20 md:pb-32 md:pt-12">
