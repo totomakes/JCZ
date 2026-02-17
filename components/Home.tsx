@@ -29,14 +29,14 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                     >
                         JUAN CARLOS ZERMEÑO
                     </motion.span>
-                    <motion.h2
+                    <motion.h1
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.3 }}
                         className="heading-xl"
                     >
                         BUILD THE AUTHORITY.<br /><span className="text-brand">OWN THE CATEGORY.</span>
-                    </motion.h2>
+                    </motion.h1>
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -75,7 +75,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                     <div className="relative aspect-[4/5] overflow-hidden grayscale hover:grayscale-0 transition-all duration-1000 group">
                         <img
                             src="/assets/hero.jpg"
-                            alt="Juan Carlos Zermeño"
+                            alt="Juan Carlos Zermeño - Strategic Authority and Category Kingmaker"
                             className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent opacity-60" />
