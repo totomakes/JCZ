@@ -122,7 +122,7 @@ const CaseStudies: React.FC<CaseStudiesProps> = ({ persona }) => {
                 </section>
             )}
 
-            {/* Lightbox */}
+            {/* Fullscreen Lightbox */}
             <AnimatePresence>
                 {selectedImage && (
                     <motion.div
@@ -130,15 +130,18 @@ const CaseStudies: React.FC<CaseStudiesProps> = ({ persona }) => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={() => setSelectedImage(null)}
-                        className="fixed inset-0 z-[100] bg-bg/70 backdrop-blur-md flex items-center justify-center p-4 md:p-20 cursor-zoom-out"
+                        className="fixed inset-0 z-[100] bg-bg/95 backdrop-blur-xl flex items-center justify-center cursor-zoom-out"
                     >
                         <motion.button
-                            initial={{ opacity: 0, rotate: -90 }}
-                            animate={{ opacity: 1, rotate: 0 }}
-                            className="absolute top-10 right-10 text-white hover:text-brand transition-all p-4 z-[110]"
-                            onClick={() => setSelectedImage(null)}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            className="absolute top-8 right-8 text-white/50 hover:text-brand transition-all p-4 z-[110] bg-white/5 rounded-full backdrop-blur-md"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setSelectedImage(null);
+                            }}
                         >
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                                 <line x1="18" y1="6" x2="6" y2="18"></line>
                                 <line x1="6" y1="6" x2="18" y2="18"></line>
                             </svg>
@@ -146,10 +149,10 @@ const CaseStudies: React.FC<CaseStudiesProps> = ({ persona }) => {
                         <motion.img
                             layoutId={selectedImage}
                             src={selectedImage}
-                            className="max-w-full max-h-[85vh] object-contain shadow-2xl"
-                            initial={{ scale: 0.9, opacity: 0 }}
+                            className="w-full h-full object-contain pointer-events-none p-4 md:p-8"
+                            initial={{ scale: 0.95, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
-                            transition={{ type: "spring", damping: 30, stiffness: 200 }}
+                            transition={{ type: "spring", damping: 35, stiffness: 200 }}
                         />
                     </motion.div>
                 )}
