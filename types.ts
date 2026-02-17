@@ -1,4 +1,3 @@
-
 export enum Page {
   HOME = 'home',
   IDENTITY = 'identity',
@@ -6,6 +5,11 @@ export enum Page {
   FRAMEWORK = 'framework',
   PHILOSOPHY = 'philosophy',
   APPLY = 'apply'
+}
+
+export enum Persona {
+  ADVISOR = 'ADVISOR',
+  ACTOR = 'ACTOR'
 }
 
 export interface CaseStudy {
@@ -19,9 +23,20 @@ export interface CaseStudy {
   image: string;
 }
 
-export interface IdentityPath {
+export interface ActorProject {
   id: string;
   title: string;
-  description: string;
+  role: string;
+  category: 'Feature Film' | 'Commercial' | 'TV';
+  director?: string;
+  production?: string;
+  year: string;
+  image: string;
+}
+
+export interface IdentityPath {
+  id: string;
   slug: string;
+  title: string;
+  description: string;
 }

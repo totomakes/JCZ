@@ -7,7 +7,7 @@ import CaseStudies from './components/CaseStudies';
 import Apply from './components/Apply';
 import Philosophy from './components/Philosophy';
 import FrameworkView from './components/Framework';
-import { Page } from './types';
+import { Page, Persona } from './types';
 import { analyzeApplication } from './services/gemini';
 
 import { HelmetProvider } from 'react-helmet-async';
@@ -16,6 +16,7 @@ import CursorGlow from './components/CursorGlow';
 
 const App: React.FC = () => {
   const [activePage, setActivePage] = useState<Page>(Page.HOME);
+  const [persona, setPersona] = useState<Persona>(Persona.ADVISOR);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [aiFeedback, setAiFeedback] = useState<string | null>(null);
 
@@ -48,9 +49,9 @@ const App: React.FC = () => {
   const renderContent = () => {
     switch (activePage) {
       case Page.HOME:
-        return <Home key="home" onNavigate={setActivePage} />;
+        return <Home key="home" onNavigate={setActivePage} persona={persona} />;
       case Page.CASE_STUDIES:
-        return <CaseStudies key="case-studies" />;
+        return <CaseStudies key="case-studies" persona={persona} />;
       case Page.APPLY:
         return (
           <Apply
@@ -62,9 +63,9 @@ const App: React.FC = () => {
           />
         );
       case Page.FRAMEWORK:
-        return <FrameworkView key="framework" onNavigate={setActivePage} />;
+        return <FrameworkView key="framework" onNavigate={setActivePage} persona={persona} />;
       case Page.PHILOSOPHY:
-        return <Philosophy key="philosophy" />;
+        return <Philosophy key="philosophy" persona={persona} />;
       default:
         return <Home key="home-default" onNavigate={setActivePage} />;
     }
@@ -72,10 +73,15 @@ const App: React.FC = () => {
 
   return (
     <HelmetProvider>
-      <div className="min-h-screen bg-bg text-text selection:bg-brand selection:text-bg overflow-x-hidden">
+      <div className={`min-h-screen bg-bg text-text selection:bg-brand selection:text-bg overflow-x-hidden ${persona === Persona.ACTOR ? 'persona-actor' : ''}`}>
         <SEO />
         <CursorGlow />
-        <Sidebar activePage={activePage} onNavigate={setActivePage} />
+        <Sidebar
+          activePage={activePage}
+          onNavigate={setActivePage}
+          currentPersona={persona}
+          onPersonaChange={setPersona}
+        />
 
         {/* Mobile Nav */}
         <div className="md:hidden fixed top-0 left-0 w-full p-6 z-50 bg-bg/80 backdrop-blur-md border-b border-white/10 flex justify-between items-center shadow-xl">
@@ -100,7 +106,9 @@ const App: React.FC = () => {
             <div className="w-10 h-10 bg-brand group-hover:bg-bg flex items-center justify-center text-bg group-hover:text-brand transition-colors">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
             </div>
-            <span className="font-heading text-lg group-hover:text-bg tracking-wider">APPLY FOR ADVISORY</span>
+            <span className="font-heading text-lg group-hover:text-bg tracking-wider">
+              {persona === Persona.ADVISOR ? 'APPLY FOR ADVISORY' : 'BOOK FOR PRODUCTION'}
+            </span>
           </button>
         </div>
       </div>

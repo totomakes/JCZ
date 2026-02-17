@@ -1,9 +1,15 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Persona } from '../types';
 
-const Philosophy: React.FC = () => {
-    const points = [
+interface PhilosophyProps {
+    persona: Persona;
+}
+
+const Philosophy: React.FC<PhilosophyProps> = ({ persona }) => {
+    const isAdvisor = persona === Persona.ADVISOR;
+
+    const advisorPoints = [
         {
             id: '01',
             title: 'PRODUCTION IS A COMMODITY',
@@ -21,6 +27,26 @@ const Philosophy: React.FC = () => {
         }
     ];
 
+    const actorPoints = [
+        {
+            id: '01',
+            title: 'TRUTH OVER PERFORMANCE',
+            text: 'Audiences don\'t want to see acting; they want to see truth. My craft is built on the architecture of authenticity within the frame.'
+        },
+        {
+            id: '02',
+            title: 'THE FRAME IS THE STAGE',
+            text: 'Every micro-expression is a strategic choice. We command the attention of the viewer by mastering the visual language of presence.'
+        },
+        {
+            id: '03',
+            title: 'IMPACT IS THE OUTCOME',
+            text: 'Whether it\'s a 30-second commercial or a 2-hour feature, the goal is the same: to move the audience from their current state to a high-intent reality.'
+        }
+    ];
+
+    const points = isAdvisor ? advisorPoints : actorPoints;
+
     return (
         <motion.div
             initial={{ opacity: 0 }}
@@ -28,7 +54,9 @@ const Philosophy: React.FC = () => {
             exit={{ opacity: 0 }}
             className="max-w-4xl pt-10 space-y-16"
         >
-            <h2 className="heading-xl">THE THESIS</h2>
+            <h2 className="heading-xl">
+                {isAdvisor ? 'THE THESIS' : 'THE CRAFT'}
+            </h2>
             <div className="space-y-24">
                 {points.map((point, i) => (
                     <motion.div
@@ -57,7 +85,9 @@ const Philosophy: React.FC = () => {
                 className="pt-20 border-t border-white/10"
             >
                 <p className="text-brand font-heading text-4xl leading-tight">
-                    "THE ULTIMATE DIFFERENTIATOR IS NOT WHAT YOU DO, BUT WHO YOU ARE PERCEIVED TO BE."
+                    {isAdvisor
+                        ? '"THE ULTIMATE DIFFERENTIATOR IS NOT WHAT YOU DO, BUT WHO YOU ARE PERCEIVED TO BE."'
+                        : '"THE ACTOR IS NOT A PERFORMER, BUT AN ARCHITECT OF EMOTIONAL REALITY."'}
                 </p>
             </motion.div>
         </motion.div>

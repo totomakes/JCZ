@@ -1,20 +1,29 @@
-
 import React from 'react';
-import { Page } from '../types';
+import { Page, Persona } from '../types';
+import PersonaToggle from './PersonaToggle';
 
 interface SidebarProps {
   activePage: Page;
   onNavigate: (page: Page) => void;
+  currentPersona: Persona;
+  onPersonaChange: (persona: Persona) => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ activePage, onNavigate }) => {
-  const navItems = [
-    { id: Page.HOME, label: '01 / SYSTEM' },
-    { id: Page.CASE_STUDIES, label: '02 / PROOF' },
-    { id: Page.FRAMEWORK, label: '03 / METHOD' },
-    { id: Page.PHILOSOPHY, label: '04 / THESIS' },
-    { id: Page.APPLY, label: '05 / APPLY' },
-  ];
+const Sidebar: React.FC<SidebarProps> = ({ activePage, onNavigate, currentPersona, onPersonaChange }) => {
+  const navItems = currentPersona === Persona.ADVISOR
+    ? [
+      { id: Page.HOME, label: '01 / SYSTEM' },
+      { id: Page.CASE_STUDIES, label: '02 / PROOF' },
+      { id: Page.FRAMEWORK, label: '03 / METHOD' },
+      { id: Page.PHILOSOPHY, label: '04 / THESIS' },
+      { id: Page.APPLY, label: '05 / APPLY' },
+    ]
+    : [
+      { id: Page.HOME, label: '01 / SYSTEM' },
+      { id: Page.CASE_STUDIES, label: '02 / REEL' },
+      { id: Page.PHILOSOPHY, label: '03 / THESIS' },
+      { id: Page.APPLY, label: '04 / ACTION' },
+    ];
 
   return (
     <nav className="fixed left-0 top-0 h-full w-20 md:w-64 border-r border-white/10 z-50 bg-bg hidden md:flex flex-col justify-between p-8">
@@ -24,7 +33,13 @@ const Sidebar: React.FC<SidebarProps> = ({ activePage, onNavigate }) => {
           onClick={() => onNavigate(Page.HOME)}
         >
           <h1 className="font-heading text-3xl leading-none text-brand">JCZ</h1>
-          <p className="text-[10px] tracking-widest text-muted mt-2 group-hover:text-white transition-colors">HOUSTON, TX</p>
+          <p className="text-[10px] tracking-widest text-muted mt-2 group-hover:text-white transition-colors uppercase">
+            {currentPersona === Persona.ADVISOR ? 'Strategic Advisor' : 'Professional Actor'}
+          </p>
+        </div>
+
+        <div className="mb-12">
+          <PersonaToggle currentPersona={currentPersona} onToggle={onPersonaChange} />
         </div>
 
         <div className="flex flex-col space-y-8">
@@ -42,7 +57,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activePage, onNavigate }) => {
       </div>
 
       <div className="text-[10px] text-muted rotate-180 [writing-mode:vertical-lr] self-center">
-        STRATEGIC AUTHORITY © 2026
+        {currentPersona === Persona.ADVISOR ? 'STRATEGIC AUTHORITY' : 'CINEMATIC PRESENCE'} © 2026
       </div>
     </nav>
   );

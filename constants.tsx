@@ -1,6 +1,41 @@
+import { CaseStudy, IdentityPath, ActorProject } from './types';
 
-import React from 'react';
-import { CaseStudy, IdentityPath } from './types';
+export const ACTOR_PROJECTS: ActorProject[] = [
+  {
+    id: 'a1',
+    title: 'THE SILENT OBSERVER',
+    role: 'Lead',
+    category: 'Feature Film',
+    director: 'M. Night Resident',
+    production: 'Cineplex Studios',
+    year: '2025',
+    image: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1200'
+  },
+  {
+    id: 'a2',
+    title: 'GLOBAL COFFEE CAMPAIGN',
+    role: 'Principal',
+    category: 'Commercial',
+    production: 'Luxury Roast Intl.',
+    year: '2025',
+    image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1200'
+  }
+];
+
+export const ACTOR_IDENTITY_PATHS: IdentityPath[] = [
+  {
+    id: 'alt1',
+    slug: 'commercial',
+    title: 'COMMERCIALS',
+    description: 'High-impact presence for premium brands and global campaigns.'
+  },
+  {
+    id: 'alt2',
+    slug: 'cinema',
+    title: 'FEATURE FILMS',
+    description: 'Cinematic storytelling and complex character architecture.'
+  }
+];
 
 export const CASE_STUDIES: CaseStudy[] = [
   {
@@ -11,7 +46,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     shift: 'Moved from feature-led marketing to founder-led intellectual leadership.',
     execution: 'Architected a 12-month visual authority campaign and proprietary methodology rollout.',
     result: '4x increase in inbound high-ticket inquiries within 6 months.',
-    image: 'https://picsum.photos/seed/cs1/1200/800'
+    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200'
   },
   {
     id: '2',
@@ -21,7 +56,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     shift: 'Aggressive brand decontamination and repositioning into the Ultra-High-Net-Worth market.',
     execution: 'Complete identity overhaul and cinematic content deployment targeting elite decision-makers.',
     result: 'Average deal size increased from $25k to $180k.',
-    image: 'https://picsum.photos/seed/cs2/1200/800'
+    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1200'
   }
 ];
 

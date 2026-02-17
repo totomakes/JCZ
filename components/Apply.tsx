@@ -1,27 +1,34 @@
-
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Persona } from '../types';
 
 interface ApplyProps {
     isSubmitting: boolean;
     aiFeedback: string | null;
     onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
     onReset: () => void;
+    persona: Persona;
 }
 
-const Apply: React.FC<ApplyProps> = ({ isSubmitting, aiFeedback, onSubmit, onReset }) => {
+const Apply: React.FC<ApplyProps> = ({ isSubmitting, aiFeedback, onSubmit, onReset, persona }) => {
+    const isAdvisor = persona === Persona.ADVISOR;
+
     return (
         <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.98 }}
-            className="max-w-4xl pt-10 pb-32"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="space-y-12 max-w-4xl mx-auto py-10"
         >
-            <h2 className="heading-xl mb-4">STRATEGIC<br />APPLICATION</h2>
-            <p className="text-muted text-xl mb-12">
-                We prioritize partners ready for deep-level transformation.
-                Filter your inquiry below.
-            </p>
+            <header className="space-y-4">
+                <h2 className="heading-xl">
+                    {isAdvisor ? 'START THE ARCHITECTURE' : 'PRODUCTION INQUIRY'}
+                </h2>
+                <p className="text-muted text-xl">
+                    {isAdvisor
+                        ? "We only accept 4 high-stakes advisory clients per quarter. Your application will be analyzed for strategic fit."
+                        : "Inquiries for feature films, global commercials, and theatrical productions."}
+                </p>
+            </header>
 
             <AnimatePresence mode="wait">
                 {aiFeedback ? (
@@ -43,7 +50,7 @@ const Apply: React.FC<ApplyProps> = ({ isSubmitting, aiFeedback, onSubmit, onRes
                             onClick={onReset}
                             className="px-8 py-4 border border-brand text-brand hover:bg-brand hover:text-bg font-heading text-lg tracking-widest transition-all"
                         >
-                            SUBMIT ANOTHER
+                            BACK TO {isAdvisor ? 'APPLICATION' : 'INQUIRY'}
                         </button>
                     </motion.div>
                 ) : (
@@ -59,47 +66,39 @@ const Apply: React.FC<ApplyProps> = ({ isSubmitting, aiFeedback, onSubmit, onRes
                             <label className="block text-sm font-heading tracking-widest text-muted uppercase">Primary Objective</label>
                             <select name="objective" required className="w-full bg-white/5 border border-white/10 p-5 text-white focus:border-brand outline-none appearance-none transition-colors">
                                 <option value="" className="bg-bg">Select...</option>
-                                <option value="authority" className="bg-bg">Build Personal Authority</option>
-                                <option value="scale" className="bg-bg">Scale Corporate Brand</option>
-                                <option value="luxury" className="bg-bg">Exit Commodity Tier</option>
-                                <option value="engine" className="bg-bg">Performance Engine</option>
+                                {isAdvisor ? (
+                                    <>
+                                        <option value="authority" className="bg-bg">Build Personal Authority</option>
+                                        <option value="scale" className="bg-bg">Scale Corporate Brand</option>
+                                        <option value="luxury" className="bg-bg">Exit Commodity Tier</option>
+                                    </>
+                                ) : (
+                                    <>
+                                        <option value="commercial" className="bg-bg">Commercial Representation</option>
+                                        <option value="film" className="bg-bg">Feature Film Collaboration</option>
+                                        <option value="talent" className="bg-bg">Talent Inquiry</option>
+                                    </>
+                                )}
                             </select>
                         </div>
                         <div className="space-y-2">
-                            <label className="block text-sm font-heading tracking-widest text-muted uppercase">Annual Revenue Range</label>
-                            <select name="revenue" required className="w-full bg-white/5 border border-white/10 p-5 text-white focus:border-brand outline-none appearance-none transition-colors">
-                                <option value="" className="bg-bg">Select...</option>
-                                <option value="1-5m" className="bg-bg">$1M - $5M</option>
-                                <option value="5-20m" className="bg-bg">$5M - $20M</option>
-                                <option value="20m+" className="bg-bg">$20M+</option>
-                            </select>
+                            <label className="block text-sm font-heading tracking-widest text-muted uppercase">Entity / Production</label>
+                            <input name="entity" type="text" required className="w-full bg-white/5 border border-white/10 p-5 text-white focus:border-brand outline-none transition-colors" placeholder={isAdvisor ? "Enterprise Name" : "Production House"} />
                         </div>
                         <div className="md:col-span-2 space-y-2">
-                            <label className="block text-sm font-heading tracking-widest text-muted uppercase">Current Marketing Structure</label>
-                            <textarea name="structure" required rows={4} className="w-full bg-white/5 border border-white/10 p-5 text-white focus:border-brand outline-none transition-colors resize-none" placeholder="Describe your current team and strategy..."></textarea>
-                        </div>
-                        <div className="space-y-2">
-                            <label className="block text-sm font-heading tracking-widest text-muted uppercase">Desired Timeline</label>
-                            <input name="timeline" type="text" required className="w-full bg-white/5 border border-white/10 p-5 text-white focus:border-brand outline-none transition-colors" placeholder="e.g. 6 Months" />
-                        </div>
-                        <div className="space-y-2">
-                            <label className="block text-sm font-heading tracking-widest text-muted uppercase">Investment Threshold</label>
-                            <input name="budget" type="text" required className="w-full bg-white/5 border border-white/10 p-5 text-white focus:border-brand outline-none transition-colors" placeholder="e.g. $10k+/mo" />
+                            <label className="block text-sm font-heading tracking-widest text-muted uppercase">Context / Project Details</label>
+                            <textarea name="structure" required rows={4} className="w-full bg-white/5 border border-white/10 p-5 text-white focus:border-brand outline-none transition-colors resize-none" placeholder={isAdvisor ? "Briefly describe your market position..." : "Describe the project, role, and timeline..."}></textarea>
                         </div>
                         <div className="md:col-span-2 pt-6">
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="w-full bg-brand text-bg py-6 font-heading text-2xl tracking-widest hover:bg-brand-dark transition-all disabled:opacity-50 relative overflow-hidden"
+                                className="w-full py-6 bg-brand text-bg font-heading text-2xl tracking-widest hover:bg-brand-dark transition-all disabled:opacity-50"
                             >
-                                {isSubmitting ? (
-                                    <span className="flex items-center justify-center gap-4">
-                                        <span className="animate-pulse">ANALYZING ALIGNMENT...</span>
-                                    </span>
-                                ) : 'SUBMIT FOR STRATEGIC REVIEW'}
+                                {isSubmitting ? 'ANALYZING...' : (isAdvisor ? 'SUBMIT APPLICATION' : 'SEND INQUIRY')}
                             </button>
                             <p className="mt-4 text-[10px] text-muted uppercase tracking-widest text-center opacity-60">
-                                All applications are reviewed personally by Juan Carlos Zermeño. Expect a 48h turnaround.
+                                All inquiries are reviewed personally. Expect a 48h turnaround.
                             </p>
                         </div>
                     </motion.form>
