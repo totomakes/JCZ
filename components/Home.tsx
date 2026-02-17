@@ -19,7 +19,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
             className="space-y-32"
         >
             {/* Hero */}
-            <section className="min-h-[90vh] flex flex-col md:flex-row items-center gap-12 pt-10">
+            <section className="min-h-[85vh] flex flex-col md:flex-row items-center justify-center gap-12">
                 <div className="flex-1 space-y-8">
                     <motion.span
                         initial={{ opacity: 0 }}

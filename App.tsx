@@ -76,7 +76,7 @@ const App: React.FC = () => {
         <button onClick={() => setActivePage(Page.APPLY)} className="font-heading text-sm border border-brand px-4 py-2 text-brand hover:bg-brand hover:text-bg transition-all">APPLY</button>
       </div>
 
-      <main className="md:ml-64 px-6 py-20 md:px-20 md:py-32">
+      <main className="md:ml-64 px-6 pb-20 pt-10 md:px-20 md:pb-32 md:pt-12">
         <div className="max-w-7xl mx-auto">
           <AnimatePresence mode="wait">
             {renderContent()}
