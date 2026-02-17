@@ -1,0 +1,7 @@
+{
+  "name": "Juan Carlos Zermeño - Authority Conversion System",
+  "description": "A high-end, strategic personal brand website designed as an authority conversion system for Juan Carlos Zermeño.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
