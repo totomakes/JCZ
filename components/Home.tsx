@@ -79,7 +79,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate, persona }) => {
                     className="flex-1 relative"
                 >
                     <img
-                        src={isAdvisor ? "/advisor_hero.jpg" : "/JCAlbi.jpg"}
+                        src={isAdvisor ? "/advisor_hero.webp" : "/actor_hero.webp"}
                         alt="Juan Carlos Zermeño"
                         className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl"
                     />
