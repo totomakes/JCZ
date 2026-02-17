@@ -12,6 +12,7 @@ import { analyzeApplication } from './services/gemini';
 
 import { HelmetProvider } from 'react-helmet-async';
 import SEO from './components/SEO';
+import CursorGlow from './components/CursorGlow';
 
 const App: React.FC = () => {
   const [activePage, setActivePage] = useState<Page>(Page.HOME);
@@ -73,6 +74,7 @@ const App: React.FC = () => {
     <HelmetProvider>
       <div className="min-h-screen bg-bg text-text selection:bg-brand selection:text-bg overflow-x-hidden">
         <SEO />
+        <CursorGlow />
         <Sidebar activePage={activePage} onNavigate={setActivePage} />
 
         {/* Mobile Nav */}
