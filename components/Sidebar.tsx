@@ -19,7 +19,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activePage, onNavigate }) => {
   return (
     <nav className="fixed left-0 top-0 h-full w-20 md:w-64 border-r border-white/10 z-50 bg-bg hidden md:flex flex-col justify-between p-8">
       <div>
-        <div 
+        <div
           className="mb-20 cursor-pointer group"
           onClick={() => onNavigate(Page.HOME)}
         >
@@ -32,9 +32,8 @@ const Sidebar: React.FC<SidebarProps> = ({ activePage, onNavigate }) => {
             <button
               key={item.id}
               onClick={() => onNavigate(item.id)}
-              className={`text-left font-heading text-xl tracking-wider transition-all hover:text-brand ${
-                activePage === item.id ? 'text-brand' : 'text-muted'
-              }`}
+              className={`text-left font-heading text-xl tracking-wider transition-all hover:text-brand ${activePage === item.id ? 'text-brand' : 'text-muted'
+                }`}
             >
               {item.label}
             </button>
@@ -43,7 +42,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activePage, onNavigate }) => {
       </div>
 
       <div className="text-[10px] text-muted rotate-180 [writing-mode:vertical-lr] self-center">
-        STRATEGIC AUTHORITY © 2024
+        STRATEGIC AUTHORITY © 2026
       </div>
     </nav>
   );
